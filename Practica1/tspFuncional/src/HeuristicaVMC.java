@@ -7,21 +7,17 @@ import java.util.stream.Collectors;
  */
 public class HeuristicaVMC extends Heuristica
 {
-    public HeuristicaVMC(Problema problema)
-    {
-        super(problema);
-    }
-
     /**
      * Resuelve TSP mediante el vecino más cercano
      * @return
      */
     @Override
-    public Ruta resolver()
+    public void resolver(Problema problema)
     {
+        this.problema = problema;
         ArrayList<Ruta> rutas;
 
-        rutas = problema.getCiudades().stream()
+        rutas = problema.obtenerCiudades().stream()
                 .map(ciudad -> {
                     Ruta rutaNueva = new Ruta();
                     rutaNueva.agregarCiudad(ciudad, 0);
@@ -30,7 +26,7 @@ public class HeuristicaVMC extends Heuristica
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        return seleccionarRuta(rutas);
+        rutaOptima = seleccionarRuta(rutas);
     }
 
     /**

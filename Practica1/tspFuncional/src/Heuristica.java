@@ -11,11 +11,9 @@ public abstract class Heuristica
 
     /**
      * Constructor de la clase
-     * @param problema
      */
-    public Heuristica(Problema problema)
+    public Heuristica()
     {
-        this.problema = problema;
         rutaOptima = new Ruta();
     }
 
@@ -23,5 +21,13 @@ public abstract class Heuristica
      * Método de resolución del problema
      * @return
      */
-    public abstract Ruta resolver();
+    public abstract void resolver(Problema problema);
+
+    /**
+     * Devuelve la ruta optima
+     * @return
+     */
+    public Ruta obtenerOptima(){
+        return rutaOptima;
+    }
 }

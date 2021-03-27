@@ -7,12 +7,12 @@ public class HeuristicaVMCPrueba {
       Problema problema = new Problema(nombreArchivo);
 
       // se crea la heuristica
-      HeuristicaVMC heuristica = new HeuristicaVMC(problema);
+      HeuristicaVMC heuristica = new HeuristicaVMC();
 
       // se resuelve
-      Ruta ruta = heuristica.resolver();
+      heuristica.resolver(problema);
 
       // se muestra la ruta optima
-      System.out.println(ruta);
+      System.out.println(heuristica.rutaOptima);
    }
 }

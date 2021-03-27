@@ -13,7 +13,6 @@ public class Problema {
      * Declaración de variables
      */
     private ArrayList<Ciudad> ciudades;
-    private ArrayList<Double> distancias;
 
     /**
      * Constructor de la clase
@@ -44,9 +43,22 @@ public class Problema {
         }
     }
 
-    public ArrayList<Ciudad> getCiudades()
+    /**
+     * Devuelve el array de ciudades
+     * @return
+     */
+    public ArrayList<Ciudad> obtenerCiudades()
     {
         return ciudades;
+    }
+
+    /**
+     * Devuelve la ciudad almacenada en una posicion
+     * @param indice
+     * @return
+     */
+    public Ciudad obtenerCiudad(int indice){
+        return ciudades.get(indice);
     }
 
     /**
@@ -60,7 +72,7 @@ public class Problema {
 
     /**
      * Devuelve la ciudad mas cercana
-     * @param ciudadfin
+     * @param ruta
      * @return
      */
     public Ciudad obtenerMasCercana(Ruta ruta)
