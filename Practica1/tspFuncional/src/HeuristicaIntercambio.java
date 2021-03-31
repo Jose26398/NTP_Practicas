@@ -1,49 +1,57 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * Clase para heurística MonteCarlo
- */
-public class HeuristicaMonteCarlo extends Heuristica
+public class HeuristicaIntercambio extends Heuristica
 {
     /**
      * Declaración de variables
      */
-    private int muestras;
     private ArrayList<Integer> indices;
+    private int intercambios;
 
 
-    /**
-     * Método de resolución a partir del problema
-     * @return
-     */
     @Override
     public void resolver(Problema problema)
     {
         this.problema = problema;
 
-        // asignar el número de muestras a generar
-        muestras = problema.obtenerDimension() * 100;
+        intercambios = problema.obtenerDimension() * 5000;
 
+        // se genera una colección de rutas aleatorias
         indices = IntStream.rangeClosed(0, problema.obtenerDimension()-1)
                 .boxed().collect(Collectors.toCollection(ArrayList::new));
 
-        rutaOptima = IntStream.range(0, muestras)
-                .mapToObj(rutaNueva -> generarAleatoria())
+        Ruta[] rutaActual = {new Ruta()};
+
+        rutaOptima = IntStream.range(0,intercambios)
+                .mapToObj(rutaNueva -> {
+                    rutaActual[0] = intercambiar(indices, rutaActual[0]);
+                    return rutaActual[0];
+                })
                 .min(Comparator.comparing(Ruta::obtenerCoste))
                 .get();
     }
 
     /**
-     * Método de generación de rutas aleatorias
+     * Intercambiar dos ciudades aleatorias de la ruta
+     * @param indices
      * @return
      */
-    private Ruta generarAleatoria(){
+    private Ruta intercambiar(ArrayList<Integer> indices, Ruta rutaActual)
+    {
         Ruta resultado = new Ruta();
 
-        // se desordena el array de índices
-        Collections.shuffle(indices);
+        int pos1 = (int) (Math.random() * indices.size());
+        int pos2;
+
+        do {
+            pos2 = (int) (Math.random() * indices.size());
+        } while (pos1 == pos2);
+
+        Collections.swap(indices, pos1, pos2);
 
         // se van agregando las ciudades en el orden en que
         // aparecen en índices
@@ -65,7 +73,11 @@ public class HeuristicaMonteCarlo extends Heuristica
         double distanciaCierre = Utilidades.calcularDistanciaEuclidea(inicio, fin);
         resultado.agregarCoste(distanciaCierre);
 
-        // se devuelve el resultado
-        return resultado;
+        if (resultado.obtenerCoste() < rutaActual.obtenerCoste()
+                || rutaActual.obtenerCoste() == 0)
+            rutaActual = resultado;
+
+        return rutaActual;
     }
+
 }
