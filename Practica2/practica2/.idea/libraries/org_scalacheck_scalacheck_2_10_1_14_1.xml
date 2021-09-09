@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.scalacheck:scalacheck_2.10:1.14.1" type="repository">
+    <properties maven-id="org.scalacheck:scalacheck_2.10:1.14.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/scalacheck/scalacheck_2.10/1.14.1/scalacheck_2.10-1.14.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.7/scala-library-2.10.7.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
